@@ -1,0 +1,12 @@
+n = 100
+A = [True] * n
+A[0] = A[1] = False
+
+for i in range(2, n):   
+    if A[i]:        
+        for k in range(i**2, n, i):
+            A[k] = False
+            
+for fig in enumerate(A):
+    if fig[1]:
+        print(fig)
