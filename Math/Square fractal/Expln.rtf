@@ -1,0 +1,53 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cspthree\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25400\viewh14380\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf2 The formula you mentioned:\
+\
+[ a1x = ax \\times (1 - \\alpha) + bx \\times \\alpha \\]\
+\
+is a standard way to compute a weighted average between two values, \\( ax \\) and \\( bx \\), using a parameter \\( \\alpha \\). Let's break it down:\
+\
+### Explanation of the Formula\
+\
+1. Parameters:\
+   - \\( ax \\): This can be thought of as the x-coordinate of point \\( a \\).\
+   - \\( bx \\): This can be thought of as the x-coordinate of point \\( b \\).\
+   - \\( \\alpha \\): This is a value between 0 and 1 that determines how much influence each of the points has on the resulting point \\( a1 \\).\
+\
+2. Weighted Average:\
+   - When \\( \\alpha = 0 \\), \\( a1 \\) will equal \\( ax \\), meaning that point \\( a \\) has full influence.\
+   - When \\( \\alpha = 1 \\), \\( a1 \\) will equal \\( bx \\), meaning that point \\( b \\) has full influence.\
+   - For values of \\( \\alpha \\) between 0 and 1, \\( a1 \\) will be a point that is somewhere between \\( a \\) and \\( b \\). The closer \\( \\alpha \\) is to 0, the closer \\( a1 \\) will be to point \\( a \\). The closer \\( \\alpha \\) is to 1, the closer \\( a1 \\) will be to point \\( b \\).\
+\
+3. Vectorization (2D points):\
+   - The same logic applies to the y-coordinates. Thus for a point \\( a1 \\):\
+     - \\( a1 = (a0 \\times (1 - \\alpha) + b0 \\times \\alpha, a1 \\times (1 - \\alpha) + b1 \\times \\alpha) \\)\
+   - This creates a new point \\( a1 \\) that is a blend of points \\( a \\) and \\( b \\).\
+\
+### Context in the Provided Code\
+\
+The provided function fract_rect appears to draw a fractal pattern within a rectangle defined by the points \\( a, b, c, d \\). Here's how it works:\
+\
+1. Base Case:\
+   - If deep < 1, the function returns; this serves as the base case to stop recursion.\
+\
+2. Drawing Lines:\
+   - The for m, n in (a, b), (b, c), (c, d), (d, a): loop draws the outline of the rectangle defined by points \\( a, b, c, d \\).\
+\
+3. Computing New Points:\
+   - Points \\( a1, b1, c1, d1 \\) are computed using the weighted average formula described earlier. Each of these new points is derived from interpolating between two corners of the rectangle with the factor \\( \\alpha \\).\
+\
+4. Recursion:\
+   - After computing the new points, the function calls itself with these new points and decrements the depth (deep-1). This process continues, drawing smaller rectangles each time until the base case is reached.\
+\
+### Example Call\
+\
+- When you call fract_rect((100, 100), (500, 100), (500, 500), (100, 500), 100), it starts drawing a rectangle with corners at (100, 100), (500, 100), (500, 500), and (100, 500) and continues creating smaller rectangles for 100 iterations of recursion.\
+\
+### Summary\
+\
+The formula used in your code is key to generating the shape of the fractal. By interpolating points and repeatedly creating smaller rectangles, fract_rect creates a visually interesting fractal pattern based on the initial rectangle defined by points \\( a, b, c, \\) and \\( d \\). The factor \\( \\alpha \\) controls how sharp or smooth the transitions between these points are.}
